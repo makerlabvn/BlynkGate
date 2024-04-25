@@ -37,13 +37,11 @@ void loop() {
   // delay(100);
 
   // Try using millis() and use "Blynk.virtualWrite" at least 10s at a time to avoid spamming the server
-  if(millis() - lastTimeSen >= 10000){
+  if(millis() - lastTimeSen >= 1){
     lastTimeSen = millis();
-    // if(digitalRead(PIN_BTN) == 0){
-      Blynk.virtualWrite(0, analogRead(PIN_SEN));
-      // Blynk.virtualWrite(245, random(0, 3));
-      // PCSerial.println(F("Test Uart to I2C"));
-    // }
+    float tempValue = analogRead(PIN_SEN);
+      Blynk.virtualWrite(1, tempValue);
+      Blynk.virtualWrite(0, tempValue);
   }
   
 }

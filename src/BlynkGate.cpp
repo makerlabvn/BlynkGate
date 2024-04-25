@@ -103,7 +103,7 @@ void BlynkGate::checkI2CThenSendSerial(){
         tempHeader->modeId = BLYNK_I2C_MODE_ID_GET_DATA;
         I2C_writeString(slaveAddress, tempCharHeader, sizeof(str_SerialBlynkI2C_DataHeader));
         // delay(1);
-        delayMicroseconds(5000);
+        delayMicroseconds(1000);
     
         
         Wire.requestFrom(slaveAddress, 32);    // request 6 bytes from slave device #8
@@ -131,7 +131,7 @@ void BlynkGate::checkI2CThenSendSerial(){
 
     if(dataString.length() > 0){
         delay(10);
-        Serial.println(dataString);
+        // Serial.println(dataString);
 
         if(dataString.indexOf(BLYNK_I2C_CMD_VIRTUAL_PIN_RX) == 0){
             String tempVirtualPin = splitString(dataString, BLYNK_I2C_CMD_VIRTUAL_PIN_RX, " ", " ",0);
@@ -195,7 +195,7 @@ void BlynkGate::virtualWrite(int vx_, float strValue_){
 }
 
 void BlynkGate::checkSendVirtualWrite(){
-    if(millis() - lastTimeVirtualWrite >= 500){
+    if(millis() - lastTimeVirtualWrite >= 2000){
         lastTimeVirtualWrite = millis();
 
         if(GETQUEUESIZE_BLYNK_GATE(BlynkGateQueue) > 0){
@@ -240,13 +240,3 @@ String BlynkGate::splitString(String v_G_motherString, String v_G_Command, Strin
 }
 
 BlynkGate Blynk(74);
-
-// void __attribute__((unused)) Blynk_I2C_GetWriteHandler(BlynkReq request, Blynk_I2C_Param  param){
-//     ;
-// }
-
-// void __empty_BlynkI2C(BlynkReq request, Blynk_I2C_Param  param) {
-//     // Empty
-// }
-
-// void Blynk_I2C_WriteDefault(BlynkReq request, Blynk_I2C_Param  param) __attribute__((weak, alias("__empty_BlynkI2C")));

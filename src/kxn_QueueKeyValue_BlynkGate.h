@@ -30,13 +30,13 @@ QueueName##Pair QueueName##Array[Size]; \
 int QueueName##Front = 0; \
 int QueueName##Rear = -1; \
 int QueueName##Count = 0;\
-DEFINE_QUEUE_FUNCTIONS(QueueName, KeyType, ValueType, Size)
+DEFINE_QUEUE_FUNCTIONS_BLYNK_GATE(QueueName, KeyType, ValueType, Size)
 
 #define ENQUEUE_BLYNK_GATE(QueueName, key, value) enqueue_BlynkGate_##QueueName(key, value)
 #define DEQUEUE_BLYNK_GATE(QueueName) dequeue_BlynkGate_##QueueName()
 #define GETQUEUESIZE_BLYNK_GATE(QueueName) getQueueSize_BlynkGate_##QueueName()
 
-#define DEFINE_QUEUE_FUNCTIONS(QueueName, KeyType, ValueType, Size) \
+#define DEFINE_QUEUE_FUNCTIONS_BLYNK_GATE(QueueName, KeyType, ValueType, Size) \
 void enqueue_BlynkGate_##QueueName(KeyType key, ValueType value) { \
     if (QueueName##Count == Size) { \
         /*printf(#QueueName " array is full.\n"); */ \
@@ -56,7 +56,7 @@ void enqueue_BlynkGate_##QueueName(KeyType key, ValueType value) { \
 \
 QueueName##Pair dequeue_BlynkGate_##QueueName() { \
     if (QueueName##Count == 0) { \
-        printf(#QueueName " array is empty.\n"); \
+        /*printf(#QueueName " array is empty.\n");*/ \
         QueueName##Pair kv = {-1, -1}; \
         return kv; \
     } else { \
