@@ -155,7 +155,7 @@ void BlynkGate::checkI2CThenSendSerial(){
 }
 
 void BlynkGate::run(){
-    this->checkUartThenSendI2C4();
+    // this->checkUartThenSendI2C4();
     this->checkI2CThenSendSerial();
     this->checkSendVirtualWrite();
 }
